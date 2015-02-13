@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DataModelStoreContainer">
+    <EntitySet Name="Leagues" EntityType="DataModel.Store.Leagues" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Teams" EntityType="DataModel.Store.Teams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Players" EntityType="DataModel.Store.Players" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Roles" EntityType="DataModel.Store.Roles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Champions" EntityType="DataModel.Store.Champions" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="LeagueTeam" Association="DataModel.Store.LeagueTeam">
+      <End Role="League" EntitySet="Leagues" />
+      <End Role="Team" EntitySet="Teams" />
+    </AssociationSet>
+    <AssociationSet Name="TeamPlayer" Association="DataModel.Store.TeamPlayer">
+      <End Role="Team" EntitySet="Teams" />
+      <End Role="Player" EntitySet="Players" />
+    </AssociationSet>
+    <AssociationSet Name="PlayerRole" Association="DataModel.Store.PlayerRole">
+      <End Role="Player" EntitySet="Players" />
+      <End Role="Role" EntitySet="Roles" />
+    </AssociationSet>
+    <AssociationSet Name="ChampionRole" Association="DataModel.Store.ChampionRole">
+      <End Role="Champion" EntitySet="Champions" />
+      <End Role="Role" EntitySet="Roles" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Leagues">
+    <Key>
+      <PropertyRef Name="LeagueName" />
+    </Key>
+    <Property Name="LeagueName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RegionName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Teams">
+    <Key>
+      <PropertyRef Name="TeamName" />
+    </Key>
+    <Property Name="TeamName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LeagueName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LeagueTeam_Team_LeagueName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Players">
+    <Key>
+      <PropertyRef Name="PlayerName" />
+    </Key>
+    <Property Name="PlayerName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TeamName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LeagueName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TeamPlayer_Player_TeamName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PlayerRole_Player_RoleName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleName" />
+    </Key>
+    <Property Name="RoleName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PrimaryAttribute" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ChampionRole_Role_ChampionName" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Champions">
+    <Key>
+      <PropertyRef Name="ChampionName" />
+    </Key>
+    <Property Name="ChampionName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PrimaryAttribute" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="LeagueTeam">
+    <End Role="League" Type="DataModel.Store.Leagues" Multiplicity="1" />
+    <End Role="Team" Type="DataModel.Store.Teams" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="League">
+        <PropertyRef Name="LeagueName" />
+      </Principal>
+      <Dependent Role="Team">
+        <PropertyRef Name="LeagueTeam_Team_LeagueName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TeamPlayer">
+    <End Role="Team" Type="DataModel.Store.Teams" Multiplicity="1" />
+    <End Role="Player" Type="DataModel.Store.Players" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Team">
+        <PropertyRef Name="TeamName" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="TeamPlayer_Player_TeamName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PlayerRole">
+    <End Role="Player" Type="DataModel.Store.Players" Multiplicity="*" />
+    <End Role="Role" Type="DataModel.Store.Roles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="RoleName" />
+      </Principal>
+      <Dependent Role="Player">
+        <PropertyRef Name="PlayerRole_Player_RoleName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ChampionRole">
+    <End Role="Champion" Type="DataModel.Store.Champions" Multiplicity="1" />
+    <End Role="Role" Type="DataModel.Store.Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Champion">
+        <PropertyRef Name="ChampionName" />
+      </Principal>
+      <Dependent Role="Role">
+        <PropertyRef Name="ChampionRole_Role_ChampionName" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DataModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Leagues" EntityType="DataModel.League" />
+          <EntitySet Name="Teams" EntityType="DataModel.Team" />
+          <EntitySet Name="Players" EntityType="DataModel.Player" />
+          <EntitySet Name="Roles" EntityType="DataModel.Role" />
+          <EntitySet Name="Champions" EntityType="DataModel.Champion" />
+          <AssociationSet Name="LeagueTeam" Association="DataModel.LeagueTeam">
+            <End Role="League" EntitySet="Leagues" />
+            <End Role="Team" EntitySet="Teams" />
+          </AssociationSet>
+          <AssociationSet Name="TeamPlayer" Association="DataModel.TeamPlayer">
+            <End Role="Team" EntitySet="Teams" />
+            <End Role="Player" EntitySet="Players" />
+          </AssociationSet>
+          <AssociationSet Name="PlayerRole" Association="DataModel.PlayerRole">
+            <End Role="Player" EntitySet="Players" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="ChampionRole" Association="DataModel.ChampionRole">
+            <End Role="Champion" EntitySet="Champions" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="League">
+          <Key>
+            <PropertyRef Name="LeagueID" />
+          </Key>
+          <Property Name="LeagueID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="RegionName" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="LeagueName" Type="String" Nullable="false" />
+          </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="PlayerID" />
+          </Key>
+          <Property Name="PlayerID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="TeamName" Type="String" Nullable="false" />
+          <Property Name="LeagueName" Type="String" Nullable="false" />
+          <Property Name="RoleName" Type="String" Nullable="false" />
+          </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="PrimaryAttribute" Type="String" Nullable="false" />
+          </EntityType>
+        <EntityType Name="Champion">
+          <Key>
+            <PropertyRef Name="ChampionID" />
+          </Key>
+          <Property Name="ChampionID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="RoleName" Type="String" Nullable="false" />
+          <Property Name="PrimaryAttribute" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="LeagueTeam">
+          <End Type="DataModel.League" Role="League" Multiplicity="1" />
+          <End Type="DataModel.Team" Role="Team" Multiplicity="*" />
+        </Association>
+        <Association Name="TeamPlayer">
+          <End Type="DataModel.Team" Role="Team" Multiplicity="1" />
+          <End Type="DataModel.Player" Role="Player" Multiplicity="*" />
+        </Association>
+        <Association Name="PlayerRole">
+          <End Type="DataModel.Player" Role="Player" Multiplicity="1" />
+          <End Type="DataModel.Role" Role="Role" Multiplicity="1" />
+        </Association>
+        <Association Name="ChampionRole">
+          <End Type="DataModel.Champion" Role="Champion" Multiplicity="1" />
+          <End Type="DataModel.Role" Role="Role" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DataModelStoreContainer" CdmEntityContainer="DataModelContainer">
+    <EntitySetMapping Name="Leagues">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.League)">
+        <MappingFragment StoreEntitySet="Leagues">
+          <ScalarProperty Name="LeagueID" ColumnName="LeagueName" />
+          <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teams">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Team)">
+        <MappingFragment StoreEntitySet="Teams">
+          <ScalarProperty Name="TeamID" ColumnName="TeamName" />
+          <ScalarProperty Name="LeagueName" ColumnName="LeagueName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Players">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Player)">
+        <MappingFragment StoreEntitySet="Players">
+          <ScalarProperty Name="PlayerID" ColumnName="PlayerName" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
+          <ScalarProperty Name="LeagueName" ColumnName="LeagueName" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Role)">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="RoleID" ColumnName="RoleName" />
+          <ScalarProperty Name="PrimaryAttribute" ColumnName="PrimaryAttribute" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Champions">
+      <EntityTypeMapping TypeName="IsTypeOf(DataModel.Champion)">
+        <MappingFragment StoreEntitySet="Champions">
+          <ScalarProperty Name="ChampionID" ColumnName="ChampionName" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="PrimaryAttribute" ColumnName="PrimaryAttribute" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="LeagueTeam" TypeName="DataModel.LeagueTeam" StoreEntitySet="Teams">
+      <EndProperty Name="League">
+        <ScalarProperty Name="LeagueID" ColumnName="LeagueTeam_Team_LeagueName" />
+      </EndProperty>
+      <EndProperty Name="Team">
+        <ScalarProperty Name="TeamID" ColumnName="TeamName" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TeamPlayer" TypeName="DataModel.TeamPlayer" StoreEntitySet="Players">
+      <EndProperty Name="Team">
+        <ScalarProperty Name="TeamID" ColumnName="TeamPlayer_Player_TeamName" />
+      </EndProperty>
+      <EndProperty Name="Player">
+        <ScalarProperty Name="PlayerID" ColumnName="PlayerName" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="PlayerRole" TypeName="DataModel.PlayerRole" StoreEntitySet="Players">
+      <EndProperty Name="Role">
+        <ScalarProperty Name="RoleID" ColumnName="PlayerRole_Player_RoleName" />
+      </EndProperty>
+      <EndProperty Name="Player">
+        <ScalarProperty Name="PlayerID" ColumnName="PlayerName" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ChampionRole" TypeName="DataModel.ChampionRole" StoreEntitySet="Roles">
+      <EndProperty Name="Champion">
+        <ScalarProperty Name="ChampionID" ColumnName="ChampionRole_Role_ChampionName" />
+      </EndProperty>
+      <EndProperty Name="Role">
+        <ScalarProperty Name="RoleID" ColumnName="RoleName" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

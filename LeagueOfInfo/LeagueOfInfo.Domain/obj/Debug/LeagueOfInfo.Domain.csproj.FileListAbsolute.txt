@@ -1,0 +1,5 @@
+C:\Users\Thomas\Desktop\CS 296\Website\LeagueOfInfo\LeagueOfInfo.Domain\bin\Debug\LeagueOfInfo.Domain.dll
+C:\Users\Thomas\Desktop\CS 296\Website\LeagueOfInfo\LeagueOfInfo.Domain\bin\Debug\LeagueOfInfo.Domain.pdb
+C:\Users\Thomas\Desktop\CS 296\Website\LeagueOfInfo\LeagueOfInfo.Domain\obj\Debug\LeagueOfInfo.Domain.csprojResolveAssemblyReference.cache
+C:\Users\Thomas\Desktop\CS 296\Website\LeagueOfInfo\LeagueOfInfo.Domain\obj\Debug\LeagueOfInfo.Domain.dll
+C:\Users\Thomas\Desktop\CS 296\Website\LeagueOfInfo\LeagueOfInfo.Domain\obj\Debug\LeagueOfInfo.Domain.pdb
