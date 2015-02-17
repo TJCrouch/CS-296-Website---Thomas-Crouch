@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using LeagueOfInfo.DAL;
 using LeagueOfInfo.Models;
+using PagedList;
 
 namespace LeagueOfInfo.Controllers
 {
@@ -16,9 +17,47 @@ namespace LeagueOfInfo.Controllers
         private LeagueOfInfoContext db = new LeagueOfInfoContext();
 
         // GET: League
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            return View(db.Leagues.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "LeagueName" : "RegionName";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+            
+            var leagues = from s in db.Leagues
+                          select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                leagues = leagues.Where(s => s.LeagueName.Contains(searchString)
+                                       || s.RegionName.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "LeagueName":
+                    leagues = leagues.OrderByDescending(s => s.LeagueName);
+                    break;
+                case "RegionName":
+                    leagues = leagues.OrderBy(s => s.RegionName);
+                    break;
+                default:
+                    leagues = leagues.OrderBy(s => s.LeagueName);
+                    break;
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(leagues.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: League/Details/5

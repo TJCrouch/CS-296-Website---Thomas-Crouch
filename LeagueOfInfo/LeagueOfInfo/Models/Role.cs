@@ -15,6 +15,7 @@ namespace LeagueOfInfo.Models
     public partial class Role
     {
         public string RoleID { get; set; }
+        public string RoleName { get; set; }
         public string PrimaryAttribute { get; set; }
     }
 }

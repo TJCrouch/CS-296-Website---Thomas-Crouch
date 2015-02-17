@@ -28,3 +28,7 @@ C:\Users\Thomas\Desktop\CS 296\Website\LeagueOfInfo\LeagueOfInfo\bin\EntityFrame
 C:\Users\Thomas\Desktop\CS 296\Website\LeagueOfInfo\LeagueOfInfo\bin\EntityFramework.SqlServer.dll
 C:\Users\Thomas\Desktop\CS 296\Website\LeagueOfInfo\LeagueOfInfo\bin\EntityFramework.xml
 C:\Users\Thomas\Desktop\CS 296\Website\LeagueOfInfo\LeagueOfInfo\bin\EntityFramework.SqlServer.xml
+C:\Users\Thomas\Desktop\CS 296\Website\LeagueOfInfo\LeagueOfInfo\bin\PagedList.dll
+C:\Users\Thomas\Desktop\CS 296\Website\LeagueOfInfo\LeagueOfInfo\bin\PagedList.Mvc.dll
+C:\Users\Thomas\Desktop\CS 296\Website\LeagueOfInfo\LeagueOfInfo\bin\PagedList.xml
+C:\Users\Thomas\Desktop\CS 296\Website\LeagueOfInfo\LeagueOfInfo\bin\PagedList.Mvc.xml

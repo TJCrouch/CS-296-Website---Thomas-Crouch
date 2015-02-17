@@ -15,6 +15,7 @@ namespace LeagueOfInfo.Models
     public partial class Player
     {
         public string PlayerID { get; set; }
+        public string PlayerName { get; set; }
         public string TeamName { get; set; }
         public string LeagueName { get; set; }
         public string RoleName { get; set; }

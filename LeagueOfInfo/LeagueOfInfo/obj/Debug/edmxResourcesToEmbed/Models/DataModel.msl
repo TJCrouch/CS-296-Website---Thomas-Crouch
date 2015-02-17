@@ -4,7 +4,8 @@
     <EntitySetMapping Name="Leagues">
       <EntityTypeMapping TypeName="IsTypeOf(DataModel.League)">
         <MappingFragment StoreEntitySet="Leagues">
-          <ScalarProperty Name="LeagueID" ColumnName="LeagueName" />
+          <ScalarProperty Name="LeagueID" ColumnName="LeagueID" />
+          <ScalarProperty Name="LeagueName" ColumnName="LeagueName" />
           <ScalarProperty Name="RegionName" ColumnName="RegionName" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -12,7 +13,8 @@
     <EntitySetMapping Name="Teams">
       <EntityTypeMapping TypeName="IsTypeOf(DataModel.Team)">
         <MappingFragment StoreEntitySet="Teams">
-          <ScalarProperty Name="TeamID" ColumnName="TeamName" />
+          <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+          <ScalarProperty Name="TeamName" ColumnName="TeamName" />
           <ScalarProperty Name="LeagueName" ColumnName="LeagueName" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -20,7 +22,8 @@
     <EntitySetMapping Name="Players">
       <EntityTypeMapping TypeName="IsTypeOf(DataModel.Player)">
         <MappingFragment StoreEntitySet="Players">
-          <ScalarProperty Name="PlayerID" ColumnName="PlayerName" />
+          <ScalarProperty Name="PlayerID" ColumnName="PlayerID" />
+          <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
           <ScalarProperty Name="TeamName" ColumnName="TeamName" />
           <ScalarProperty Name="LeagueName" ColumnName="LeagueName" />
           <ScalarProperty Name="RoleName" ColumnName="RoleName" />
@@ -30,7 +33,8 @@
     <EntitySetMapping Name="Roles">
       <EntityTypeMapping TypeName="IsTypeOf(DataModel.Role)">
         <MappingFragment StoreEntitySet="Roles">
-          <ScalarProperty Name="RoleID" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
           <ScalarProperty Name="PrimaryAttribute" ColumnName="PrimaryAttribute" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -38,7 +42,8 @@
     <EntitySetMapping Name="Champions">
       <EntityTypeMapping TypeName="IsTypeOf(DataModel.Champion)">
         <MappingFragment StoreEntitySet="Champions">
-          <ScalarProperty Name="ChampionID" ColumnName="ChampionName" />
+          <ScalarProperty Name="ChampionID" ColumnName="ChampionID" />
+          <ScalarProperty Name="ChampionName" ColumnName="ChampionName" />
           <ScalarProperty Name="RoleName" ColumnName="RoleName" />
           <ScalarProperty Name="PrimaryAttribute" ColumnName="PrimaryAttribute" />
         </MappingFragment>
@@ -46,34 +51,34 @@
     </EntitySetMapping>
     <AssociationSetMapping Name="LeagueTeam" TypeName="DataModel.LeagueTeam" StoreEntitySet="Teams">
       <EndProperty Name="League">
-        <ScalarProperty Name="LeagueID" ColumnName="LeagueTeam_Team_LeagueName" />
+        <ScalarProperty Name="LeagueID" ColumnName="LeagueTeam_Team_LeagueID" />
       </EndProperty>
       <EndProperty Name="Team">
-        <ScalarProperty Name="TeamID" ColumnName="TeamName" />
+        <ScalarProperty Name="TeamID" ColumnName="TeamID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="TeamPlayer" TypeName="DataModel.TeamPlayer" StoreEntitySet="Players">
       <EndProperty Name="Team">
-        <ScalarProperty Name="TeamID" ColumnName="TeamPlayer_Player_TeamName" />
+        <ScalarProperty Name="TeamID" ColumnName="TeamPlayer_Player_TeamID" />
       </EndProperty>
       <EndProperty Name="Player">
-        <ScalarProperty Name="PlayerID" ColumnName="PlayerName" />
+        <ScalarProperty Name="PlayerID" ColumnName="PlayerID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="PlayerRole" TypeName="DataModel.PlayerRole" StoreEntitySet="Players">
       <EndProperty Name="Role">
-        <ScalarProperty Name="RoleID" ColumnName="PlayerRole_Player_RoleName" />
+        <ScalarProperty Name="RoleID" ColumnName="PlayerRole_Player_RoleID" />
       </EndProperty>
       <EndProperty Name="Player">
-        <ScalarProperty Name="PlayerID" ColumnName="PlayerName" />
+        <ScalarProperty Name="PlayerID" ColumnName="PlayerID" />
       </EndProperty>
     </AssociationSetMapping>
     <AssociationSetMapping Name="ChampionRole" TypeName="DataModel.ChampionRole" StoreEntitySet="Roles">
       <EndProperty Name="Champion">
-        <ScalarProperty Name="ChampionID" ColumnName="ChampionRole_Role_ChampionName" />
+        <ScalarProperty Name="ChampionID" ColumnName="ChampionRole_Role_ChampionID" />
       </EndProperty>
       <EndProperty Name="Role">
-        <ScalarProperty Name="RoleID" ColumnName="RoleName" />
+        <ScalarProperty Name="RoleID" ColumnName="RoleID" />
       </EndProperty>
     </AssociationSetMapping>
   </EntityContainerMapping>

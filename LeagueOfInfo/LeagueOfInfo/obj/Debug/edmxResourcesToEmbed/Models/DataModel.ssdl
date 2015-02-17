@@ -25,42 +25,47 @@
   </EntityContainer>
   <EntityType Name="Leagues">
     <Key>
-      <PropertyRef Name="LeagueName" />
+      <PropertyRef Name="LeagueID" />
     </Key>
+    <Property Name="LeagueID" Type="nvarchar(max)" Nullable="false" />
     <Property Name="LeagueName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="RegionName" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Teams">
     <Key>
-      <PropertyRef Name="TeamName" />
+      <PropertyRef Name="TeamID" />
     </Key>
+    <Property Name="TeamID" Type="nvarchar(max)" Nullable="false" />
     <Property Name="TeamName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="LeagueName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="LeagueTeam_Team_LeagueName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LeagueTeam_Team_LeagueID" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Players">
     <Key>
-      <PropertyRef Name="PlayerName" />
+      <PropertyRef Name="PlayerID" />
     </Key>
+    <Property Name="PlayerID" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PlayerName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="TeamName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="LeagueName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="RoleName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="TeamPlayer_Player_TeamName" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="PlayerRole_Player_RoleName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TeamPlayer_Player_TeamID" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PlayerRole_Player_RoleID" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Roles">
     <Key>
-      <PropertyRef Name="RoleName" />
+      <PropertyRef Name="RoleID" />
     </Key>
+    <Property Name="RoleID" Type="nvarchar(max)" Nullable="false" />
     <Property Name="RoleName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PrimaryAttribute" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="ChampionRole_Role_ChampionName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ChampionRole_Role_ChampionID" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Champions">
     <Key>
-      <PropertyRef Name="ChampionName" />
+      <PropertyRef Name="ChampionID" />
     </Key>
+    <Property Name="ChampionID" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ChampionName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="RoleName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PrimaryAttribute" Type="nvarchar(max)" Nullable="false" />
@@ -70,10 +75,10 @@
     <End Role="Team" Type="DataModel.Store.Teams" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="League">
-        <PropertyRef Name="LeagueName" />
+        <PropertyRef Name="LeagueID" />
       </Principal>
       <Dependent Role="Team">
-        <PropertyRef Name="LeagueTeam_Team_LeagueName" />
+        <PropertyRef Name="LeagueTeam_Team_LeagueID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -82,10 +87,10 @@
     <End Role="Player" Type="DataModel.Store.Players" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Team">
-        <PropertyRef Name="TeamName" />
+        <PropertyRef Name="TeamID" />
       </Principal>
       <Dependent Role="Player">
-        <PropertyRef Name="TeamPlayer_Player_TeamName" />
+        <PropertyRef Name="TeamPlayer_Player_TeamID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -94,10 +99,10 @@
     <End Role="Role" Type="DataModel.Store.Roles" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="Role">
-        <PropertyRef Name="RoleName" />
+        <PropertyRef Name="RoleID" />
       </Principal>
       <Dependent Role="Player">
-        <PropertyRef Name="PlayerRole_Player_RoleName" />
+        <PropertyRef Name="PlayerRole_Player_RoleID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -106,10 +111,10 @@
     <End Role="Role" Type="DataModel.Store.Roles" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Champion">
-        <PropertyRef Name="ChampionName" />
+        <PropertyRef Name="ChampionID" />
       </Principal>
       <Dependent Role="Role">
-        <PropertyRef Name="ChampionRole_Role_ChampionName" />
+        <PropertyRef Name="ChampionRole_Role_ChampionID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

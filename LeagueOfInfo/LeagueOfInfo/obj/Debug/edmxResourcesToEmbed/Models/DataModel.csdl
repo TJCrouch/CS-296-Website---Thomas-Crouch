@@ -28,6 +28,7 @@
       <PropertyRef Name="LeagueID" />
     </Key>
     <Property Name="LeagueID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="LeagueName" Type="String" Nullable="false" />
     <Property Name="RegionName" Type="String" Nullable="false" />
   </EntityType>
   <EntityType Name="Team">
@@ -35,6 +36,7 @@
       <PropertyRef Name="TeamID" />
     </Key>
     <Property Name="TeamID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="TeamName" Type="String" Nullable="false" />
     <Property Name="LeagueName" Type="String" Nullable="false" />
   </EntityType>
   <EntityType Name="Player">
@@ -42,6 +44,7 @@
       <PropertyRef Name="PlayerID" />
     </Key>
     <Property Name="PlayerID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="PlayerName" Type="String" Nullable="false" />
     <Property Name="TeamName" Type="String" Nullable="false" />
     <Property Name="LeagueName" Type="String" Nullable="false" />
     <Property Name="RoleName" Type="String" Nullable="false" />
@@ -51,6 +54,7 @@
       <PropertyRef Name="RoleID" />
     </Key>
     <Property Name="RoleID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="RoleName" Type="String" Nullable="false" />
     <Property Name="PrimaryAttribute" Type="String" Nullable="false" />
   </EntityType>
   <EntityType Name="Champion">
@@ -58,6 +62,7 @@
       <PropertyRef Name="ChampionID" />
     </Key>
     <Property Name="ChampionID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="ChampionName" Type="String" Nullable="false" />
     <Property Name="RoleName" Type="String" Nullable="false" />
     <Property Name="PrimaryAttribute" Type="String" Nullable="false" />
   </EntityType>
