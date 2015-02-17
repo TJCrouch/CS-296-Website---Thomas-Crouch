@@ -14,7 +14,7 @@ namespace LeagueOfInfo.Models
     
     public partial class League
     {
-        public string LeagueID { get; set; }
+        public int LeagueID { get; set; }
         public string LeagueName { get; set; }
         public string RegionName { get; set; }
     }

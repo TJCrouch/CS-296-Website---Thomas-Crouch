@@ -14,7 +14,7 @@ namespace LeagueOfInfo.Models
     
     public partial class Champion
     {
-        public string ChampionID { get; set; }
+        public int ChampionID { get; set; }
         public string ChampionName { get; set; }
         public string RoleName { get; set; }
         public string PrimaryAttribute { get; set; }

@@ -86,16 +86,23 @@ namespace LeagueOfInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TeamID,LeagueName")] Team team)
+        public ActionResult Create([Bind(Include = "TeamID,LeagueName")] TeamViewModel teamVm)
         {
             if (ModelState.IsValid)
             {
+                Team team = new Team();
+                team.TeamName = teamVm.TeamName;
+
+                var league = (from a in db.Leagues
+                             where a.LeagueName == teamVm.LeagueName.Name
+                                  select a).FirstOrDefault<League>();
+                team.TeamID = team.TeamID;
                 db.Teams.Add(team);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(team);
+            return View(teamVm);
         }
 
         // GET: Team/Edit/5
