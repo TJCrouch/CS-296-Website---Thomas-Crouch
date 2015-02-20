@@ -86,7 +86,7 @@ namespace LeagueOfInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TeamID,LeagueName")] TeamViewModel teamVm)
+        public ActionResult Create([Bind(Include = "TeamID,TeamName,LeagueName")] TeamViewModel teamVm)
         {
             if (ModelState.IsValid)
             {
