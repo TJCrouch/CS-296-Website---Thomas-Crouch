@@ -11,12 +11,30 @@ namespace LeagueOfInfo.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Champion
     {
-        public int ChampionID { get; set; }
+        public string ChampionID { get; set; }
+
+        [Required]
+        [StringLength(25, MinimumLength=2)]
+        [Display(Name = "Champion Name")]
         public string ChampionName { get; set; }
+
+        [Required]
+        [StringLength(25, MinimumLength = 2)]
+        [Display(Name = "Role Name")]
         public string RoleName { get; set; }
+
+        [Required]
+        [StringLength(25, MinimumLength = 2)]
+        [Display(Name = "Primary Attribute")]
         public string PrimaryAttribute { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime CreationDate { get; set; }
     }
 }

@@ -11,11 +11,21 @@ namespace LeagueOfInfo.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class Role
     {
-        public int RoleID { get; set; }
+        public string RoleID { get; set; }
+
+        [Required]
+        [StringLength(25, MinimumLength = 2)]
+        [Display(Name = "Role Name")]
         public string RoleName { get; set; }
+
+        [Required]
+        [StringLength(25, MinimumLength = 2)]
+        [Display(Name = "Primary Attribute")]
         public string PrimaryAttribute { get; set; }
     }
 }

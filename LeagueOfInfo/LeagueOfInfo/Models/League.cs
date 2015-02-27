@@ -11,11 +11,21 @@ namespace LeagueOfInfo.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class League
     {
-        public int LeagueID { get; set; }
+        public string LeagueID { get; set; }
+
+        [Required]
+        [StringLength(25, MinimumLength = 2)]
+        [Display(Name = "League Name")]
         public string LeagueName { get; set; }
+
+        [Required]
+        [StringLength(25, MinimumLength = 2)]
+        [Display(Name = "Region Name")]
         public string RegionName { get; set; }
     }
 }

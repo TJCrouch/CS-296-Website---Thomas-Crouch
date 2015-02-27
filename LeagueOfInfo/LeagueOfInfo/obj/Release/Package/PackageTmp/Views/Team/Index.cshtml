@@ -1,0 +1,56 @@
+﻿@model PagedList.IPagedList<LeagueOfInfo.Models.Team>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Teams";
+}
+
+<h2>Teams</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Team", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Team Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("League Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TeamName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LeagueName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.TeamID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.TeamID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.TeamID })
+        </td>
+    </tr>
+}
+
+</table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

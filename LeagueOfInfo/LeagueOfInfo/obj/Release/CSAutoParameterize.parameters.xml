@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DataModelContainer-Web.config Connection String" description="DataModelContainer Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.DataModel.csdl|res://*/Models.DataModel.ssdl|res://*/Models.DataModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=(localdb)\v11.0;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Thomas\\Desktop\\CS\ 296\\Website\\LeagueOfInfo\\LeagueOfInfo\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DataModelContainer']/@connectionString" />
+  </parameter>
+  <parameter name="LeagueOfInfoContext-Web.config Connection String" description="LeagueOfInfoContext Connection String used in web.config by the application to access the database." defaultValue="Data Source=(LocalDb)\v11.0;Initial Catalog=LeagueOfInfo1;Integrated Security=SSPI;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Thomas\\Desktop\\CS\ 296\\Website\\LeagueOfInfo\\LeagueOfInfo\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='LeagueOfInfoContext']/@connectionString" />
+  </parameter>
+</parameters>

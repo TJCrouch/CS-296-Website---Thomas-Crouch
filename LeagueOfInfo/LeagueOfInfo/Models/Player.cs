@@ -11,13 +11,31 @@ namespace LeagueOfInfo.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
     
     public partial class Player
     {
-        public int PlayerID { get; set; }
+        public string PlayerID { get; set; }
+
+        [Required]
+        [StringLength(25, MinimumLength = 2)]
+        [Display(Name = "Player Name")]
         public string PlayerName { get; set; }
+
+        [Required]
+        [StringLength(25, MinimumLength = 2)]
+        [Display(Name = "Team Name")]
         public string TeamName { get; set; }
+
+        [Required]
+        [StringLength(25, MinimumLength = 2)]
+        [Display(Name = "League Name")]
         public string LeagueName { get; set; }
+
+        [Required]
+        [StringLength(25, MinimumLength = 2)]
+        [Display(Name = "Role Name")]
         public string RoleName { get; set; }
     }
 }

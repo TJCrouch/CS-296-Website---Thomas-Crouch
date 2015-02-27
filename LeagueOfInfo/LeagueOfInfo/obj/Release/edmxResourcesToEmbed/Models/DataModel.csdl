@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="DataModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Leagues" EntityType="DataModel.League" />
+    <EntitySet Name="Teams" EntityType="DataModel.Team" />
+    <EntitySet Name="Players" EntityType="DataModel.Player" />
+    <EntitySet Name="Roles" EntityType="DataModel.Role" />
+    <EntitySet Name="Champions" EntityType="DataModel.Champion" />
+    <AssociationSet Name="LeagueTeam" Association="DataModel.LeagueTeam">
+      <End Role="League" EntitySet="Leagues" />
+      <End Role="Team" EntitySet="Teams" />
+    </AssociationSet>
+    <AssociationSet Name="TeamPlayer" Association="DataModel.TeamPlayer">
+      <End Role="Team" EntitySet="Teams" />
+      <End Role="Player" EntitySet="Players" />
+    </AssociationSet>
+    <AssociationSet Name="PlayerRole" Association="DataModel.PlayerRole">
+      <End Role="Player" EntitySet="Players" />
+      <End Role="Role" EntitySet="Roles" />
+    </AssociationSet>
+    <AssociationSet Name="ChampionRole" Association="DataModel.ChampionRole">
+      <End Role="Champion" EntitySet="Champions" />
+      <End Role="Role" EntitySet="Roles" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="League">
+    <Key>
+      <PropertyRef Name="LeagueID" />
+    </Key>
+    <Property Name="LeagueID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="LeagueName" Type="String" Nullable="false" />
+    <Property Name="RegionName" Type="String" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Team">
+    <Key>
+      <PropertyRef Name="TeamID" />
+    </Key>
+    <Property Name="TeamID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="TeamName" Type="String" Nullable="false" />
+    <Property Name="LeagueName" Type="String" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Player">
+    <Key>
+      <PropertyRef Name="PlayerID" />
+    </Key>
+    <Property Name="PlayerID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="PlayerName" Type="String" Nullable="false" />
+    <Property Name="TeamName" Type="String" Nullable="false" />
+    <Property Name="LeagueName" Type="String" Nullable="false" />
+    <Property Name="RoleName" Type="String" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="RoleName" Type="String" Nullable="false" />
+    <Property Name="PrimaryAttribute" Type="String" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Champion">
+    <Key>
+      <PropertyRef Name="ChampionID" />
+    </Key>
+    <Property Name="ChampionID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" />
+    <Property Name="ChampionName" Type="String" Nullable="false" />
+    <Property Name="RoleName" Type="String" Nullable="false" />
+    <Property Name="PrimaryAttribute" Type="String" Nullable="false" />
+  </EntityType>
+  <Association Name="LeagueTeam">
+    <End Type="DataModel.League" Role="League" Multiplicity="1" />
+    <End Type="DataModel.Team" Role="Team" Multiplicity="*" />
+  </Association>
+  <Association Name="TeamPlayer">
+    <End Type="DataModel.Team" Role="Team" Multiplicity="1" />
+    <End Type="DataModel.Player" Role="Player" Multiplicity="*" />
+  </Association>
+  <Association Name="PlayerRole">
+    <End Type="DataModel.Player" Role="Player" Multiplicity="1" />
+    <End Type="DataModel.Role" Role="Role" Multiplicity="1" />
+  </Association>
+  <Association Name="ChampionRole">
+    <End Type="DataModel.Champion" Role="Champion" Multiplicity="1" />
+    <End Type="DataModel.Role" Role="Role" Multiplicity="*" />
+  </Association>
+</Schema>
