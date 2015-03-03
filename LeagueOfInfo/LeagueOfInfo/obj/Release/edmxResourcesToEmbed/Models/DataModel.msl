@@ -46,6 +46,7 @@
           <ScalarProperty Name="ChampionName" ColumnName="ChampionName" />
           <ScalarProperty Name="RoleName" ColumnName="RoleName" />
           <ScalarProperty Name="PrimaryAttribute" ColumnName="PrimaryAttribute" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

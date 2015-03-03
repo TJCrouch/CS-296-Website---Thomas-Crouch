@@ -14,7 +14,14 @@ namespace LeagueOfInfo.Controllers
 {
     public class PlayerController : Controller
     {
-        private LeagueOfInfoContext db = new LeagueOfInfoContext();
+        //private LeagueOfInfoContext db = new LeagueOfInfoContext();
+
+        private IPlayerRepository playerRepository;
+
+        public PlayerController()
+        {
+            this.playerRepository = new PlayerRepository(new LeagueOfInfoContext());
+        }
 
         // GET: Player
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
@@ -33,7 +40,7 @@ namespace LeagueOfInfo.Controllers
 
             ViewBag.CurrentFilter = searchString;
             
-            var players = from s in db.Players
+            var players = from s in playerRepository.GetPlayers()
                         select s;
 
             if (!String.IsNullOrEmpty(searchString))
@@ -69,8 +76,10 @@ namespace LeagueOfInfo.Controllers
         }
 
         // GET: Player/Details/5
-        public ActionResult Details(string id)
+        public ViewResult Details(string id)
         {
+            Player player = playerRepository.GetPlayerByID(id);
+            /*
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -81,6 +90,7 @@ namespace LeagueOfInfo.Controllers
                 return HttpNotFound();
             }
             return View(player);
+             */
         }
 
         // GET: Player/Create
@@ -96,6 +106,7 @@ namespace LeagueOfInfo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "PlayerID,TeamName,LeagueName,RoleName")] Player player)
         {
+            /*
             if (ModelState.IsValid)
             {
                 db.Players.Add(player);
@@ -103,6 +114,23 @@ namespace LeagueOfInfo.Controllers
                 return RedirectToAction("Index");
             }
 
+            return View(player);
+             */
+
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    playerRepository.InsertPlayer(player);
+                    playerRepository.Save();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DataException /* dex */)
+            {
+                //Log the error (uncomment dex variable name after DataException and add a line here to write a log.
+                ModelState.AddModelError(string.Empty, "Unable to save changes. Try again, and if the problem persists contact your system administrator.");
+            }
             return View(player);
         }
 
@@ -113,7 +141,7 @@ namespace LeagueOfInfo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Player player = db.Players.Find(id);
+            Player player = playerRepository.GetStudentByID(id);
             if (player == null)
             {
                 return HttpNotFound();
@@ -130,8 +158,8 @@ namespace LeagueOfInfo.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(player).State = EntityState.Modified;
-                db.SaveChanges();
+                playerRepository.UpdatePlayer(player);
+                playerRepository.Save();
                 return RedirectToAction("Index");
             }
             return View(player);
@@ -144,7 +172,7 @@ namespace LeagueOfInfo.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Player player = db.Players.Find(id);
+            Player player = playerRepository.GetPlayerByID(id);
             if (player == null)
             {
                 return HttpNotFound();
@@ -157,18 +185,15 @@ namespace LeagueOfInfo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Player player = db.Players.Find(id);
-            db.Players.Remove(player);
-            db.SaveChanges();
+            Player player = playerRepository.GetPlayerByID(id);
+            playerRepository.DeletePlayer(id);
+            playerRepository.Save();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            playerRepository.Dispose();
             base.Dispose(disposing);
         }
     }

@@ -69,6 +69,7 @@
     <Property Name="ChampionName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="RoleName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="PrimaryAttribute" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="CreationDate" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <Association Name="LeagueTeam">
     <End Role="League" Type="DataModel.Store.Leagues" Multiplicity="1" />

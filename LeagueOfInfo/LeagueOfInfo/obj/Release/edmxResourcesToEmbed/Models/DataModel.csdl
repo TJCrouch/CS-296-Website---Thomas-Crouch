@@ -65,6 +65,7 @@
     <Property Name="ChampionName" Type="String" Nullable="false" />
     <Property Name="RoleName" Type="String" Nullable="false" />
     <Property Name="PrimaryAttribute" Type="String" Nullable="false" />
+    <Property Name="CreationDate" Type="String" Nullable="false" />
   </EntityType>
   <Association Name="LeagueTeam">
     <End Type="DataModel.League" Role="League" Multiplicity="1" />

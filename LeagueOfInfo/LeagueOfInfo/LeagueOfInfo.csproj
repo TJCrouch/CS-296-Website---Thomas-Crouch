@@ -134,6 +134,8 @@
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="DAL\LeagueOfInfoContext.cs" />
     <Compile Include="DAL\LeagueOfInfoInitializer.cs" />
+    <Compile Include="DAL\IPlayerRepository.cs" />
+    <Compile Include="DAL\PlayerRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
