@@ -16,7 +16,7 @@ namespace LeagueOfInfo.Models
     
     public partial class League
     {
-        public string LeagueID { get; set; }
+        public int LeagueID { get; set; }
 
         [Required]
         [StringLength(25, MinimumLength = 2)]

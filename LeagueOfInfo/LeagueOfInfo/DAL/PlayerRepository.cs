@@ -40,7 +40,7 @@ namespace LeagueOfInfo.DAL
 
         public void UpdatePlayer(Player player)
         {
-            context.Entry(player).State = EntityState.Modified;
+            context.Entry(player).State = System.Data.Entity.EntityState.Modified;
         }
 
         public void Save()

@@ -7,7 +7,7 @@ using LeagueOfInfo.Models;
 
 namespace LeagueOfInfo.DAL
 {
-    public class IPlayerRepository : IDisposable
+    public interface IPlayerRepository : IDisposable
     {
         IEnumerable<Player> GetPlayers();
         Player GetPlayerByID(int playerId);

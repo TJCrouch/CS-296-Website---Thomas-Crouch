@@ -16,7 +16,7 @@ namespace LeagueOfInfo.Models
     
     public partial class Role
     {
-        public string RoleID { get; set; }
+        public int RoleID { get; set; }
 
         [Required]
         [StringLength(25, MinimumLength = 2)]

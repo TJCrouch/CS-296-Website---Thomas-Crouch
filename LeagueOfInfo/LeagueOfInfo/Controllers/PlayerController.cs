@@ -76,21 +76,21 @@ namespace LeagueOfInfo.Controllers
         }
 
         // GET: Player/Details/5
-        public ViewResult Details(string id)
+        public ActionResult Details(int id)
         {
             Player player = playerRepository.GetPlayerByID(id);
-            /*
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Player player = db.Players.Find(id);
+            
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            // Player player = db.Players.Find(id);
             if (player == null)
             {
                 return HttpNotFound();
             }
             return View(player);
-             */
+            
         }
 
         // GET: Player/Create
@@ -135,13 +135,13 @@ namespace LeagueOfInfo.Controllers
         }
 
         // GET: Player/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Player player = playerRepository.GetStudentByID(id);
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
+            Player player = playerRepository.GetPlayerByID(id);
             if (player == null)
             {
                 return HttpNotFound();
@@ -166,12 +166,12 @@ namespace LeagueOfInfo.Controllers
         }
 
         // GET: Player/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
             Player player = playerRepository.GetPlayerByID(id);
             if (player == null)
             {
@@ -183,7 +183,7 @@ namespace LeagueOfInfo.Controllers
         // POST: Player/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
             Player player = playerRepository.GetPlayerByID(id);
             playerRepository.DeletePlayer(id);
