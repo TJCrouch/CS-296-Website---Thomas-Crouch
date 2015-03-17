@@ -65,7 +65,7 @@ namespace LeagueOfInfo.Controllers
         }
 
         // GET: Champion/Details/5
-        public ActionResult Details(string id)
+        public ActionResult Details(int id)
         {
             if (id == null)
             {
@@ -103,7 +103,7 @@ namespace LeagueOfInfo.Controllers
         }
 
         // GET: Champion/Edit/5
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int id)
         {
             if (id == null)
             {
@@ -134,7 +134,7 @@ namespace LeagueOfInfo.Controllers
         }
 
         // GET: Champion/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
             if (id == null)
             {
@@ -151,7 +151,7 @@ namespace LeagueOfInfo.Controllers
         // POST: Champion/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
             Champion champion = db.Champions.Find(id);
             db.Champions.Remove(champion);

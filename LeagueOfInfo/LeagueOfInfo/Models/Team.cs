@@ -16,6 +16,7 @@ namespace LeagueOfInfo.Models
     
     public partial class Team
     {
+        [Key]
         public int TeamID { get; set; }
 
         [Required]

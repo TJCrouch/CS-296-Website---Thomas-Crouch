@@ -16,6 +16,7 @@ namespace LeagueOfInfo.Models
     
     public partial class Role
     {
+        [Key]
         public int RoleID { get; set; }
 
         [Required]

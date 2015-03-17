@@ -16,6 +16,7 @@ namespace LeagueOfInfo.Models
 
     public partial class Champion
     {
+        [Key]
         public int ChampionID { get; set; }
 
         [Required]
@@ -33,8 +34,10 @@ namespace LeagueOfInfo.Models
         [Display(Name = "Primary Attribute")]
         public string PrimaryAttribute { get; set; }
 
+        /*
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime CreationDate { get; set; }
+         */
     }
 }
