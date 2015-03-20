@@ -8,9 +8,6 @@
 
 <h2>Leagues</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 
 @using (Html.BeginForm("Index", "League", FormMethod.Get))
 {
@@ -40,9 +37,7 @@
             @Html.DisplayFor(modelItem => item.RegionName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.LeagueID }) |
             @Html.ActionLink("Details", "Details", new { id=item.LeagueID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.LeagueID })
         </td>
     </tr>
 }

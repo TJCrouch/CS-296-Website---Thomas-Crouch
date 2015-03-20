@@ -21,6 +21,7 @@ namespace LeagueOfInfo.DAL
         public DbSet<Team> Teams { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Role> Roles { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         /*
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

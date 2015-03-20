@@ -8,9 +8,6 @@
 
 <h2>Champions</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 
 @using (Html.BeginForm("Index", "Champion", FormMethod.Get))
 {
@@ -46,9 +43,7 @@
             @Html.DisplayFor(modelItem => item.PrimaryAttribute)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ChampionID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ChampionID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ChampionID })
+            @Html.ActionLink("Details", "Details", new { id=item.ChampionID })
         </td>
     </tr>
 }

@@ -167,5 +167,44 @@ namespace LeagueOfInfo.Controllers
             }
             base.Dispose(disposing);
         }
+        /*
+        [HttpPost]
+        public ActionResult Comment(CommentViewModel commentVM)
+        {
+            if (ModelState.IsValid)
+            {
+                var dataComment = new Comment();
+                dataComment.PostID = commentVM.ID;
+                dataComment.AuthorName = commentVM.Author;
+                dataComment.CommentBody = commentVM.Body;
+
+                commentRepository.Create(comment);
+                commentRepository.SaveChanges();
+
+                return new EmptyResult();
+            }
+        }
+         */
+
+        public ActionResult Comment()
+        {
+            ViewBag.Comments = new SelectList(db.Comments, "AuthorName", "CommentBody");
+            return View();
+        }
+
+        [HttpGet]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "AuthorName,CommentBody")] Comment comment)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Comments.Add(comment);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Comments = new SelectList(db.Comments, "AuthorName", "CommentBody", comment.ChampionID);
+            return View(comment);
+        }
     }
 }

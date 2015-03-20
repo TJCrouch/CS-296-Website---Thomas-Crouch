@@ -8,17 +8,20 @@ using System.Web;
 using System.Web.Mvc;
 using LeagueOfInfo.DAL;
 using LeagueOfInfo.Models;
-using PagedList;
+
 
 namespace LeagueOfInfo.Controllers
 {
     public class TeamController : Controller
     {
-        private LeagueOfInfoContext db = new LeagueOfInfoContext();
+        private UnitOfWork unitOfWork = new UnitOfWork();
 
         // GET: Team
-        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public /*ActionResult*/ViewResult Index(/*string sortOrder, string currentFilter, string searchString, int? page*/)
         {
+            var teams = unitOfWork.TeamRepository.Get(includeProperties: "Leagues");
+            return View(teams.ToList());
+            /*
             ViewBag.CurrentSort = sortOrder;
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "TeamName" : "LeagueName";
             
@@ -58,11 +61,15 @@ namespace LeagueOfInfo.Controllers
             int pageSize = 3;
             int pageNumber = (page ?? 1);
             return View(teams.ToPagedList(pageNumber, pageSize));
+             */
         }
 
         // GET: Team/Details/5
-        public ActionResult Details(int id)
+        public /*ActionResult*/ViewResult Details(int id)
         {
+            Team team = unitOfWork.TeamRepository.GetByID(id);
+            return View(team);
+            /*
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -73,11 +80,13 @@ namespace LeagueOfInfo.Controllers
                 return HttpNotFound();
             }
             return View(team);
+             */
         }
 
         // GET: Team/Create
         public ActionResult Create()
         {
+            PopulateLeaguesDropDownList();
             return View();
         }
 
@@ -86,8 +95,24 @@ namespace LeagueOfInfo.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "TeamID,TeamName,LeagueName")] TeamViewModel teamVm)
+        public ActionResult Create([Bind(Include = "TeamID,TeamName,LeagueName")] /*TeamViewModel teamVm*/ Team team)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    unitOfWork.TeamRepository.Insert(team);
+                    unitOfWork.Save();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DataException /* dex */)
+            {
+                ModelState.AddModelError("", "Unable to save changes.  Try again, and if the problem persists, see your system administrator.");
+            }
+            PopulateLeaguesDropDownList(team.LeagueID);
+            return View(team);
+            /*
             if (ModelState.IsValid)
             {
                 Team team = new Team();
@@ -103,11 +128,16 @@ namespace LeagueOfInfo.Controllers
             }
 
             return View(teamVm);
+             */
         }
 
         // GET: Team/Edit/5
         public ActionResult Edit(int id)
         {
+            Team team = unitOfWork.TeamRepository.GetByID(id);
+            PopulateLeaguesDropDownList(team.LeagueID);
+            return View(team);
+            /*
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -118,6 +148,7 @@ namespace LeagueOfInfo.Controllers
                 return HttpNotFound();
             }
             return View(team);
+             */
         }
 
         // POST: Team/Edit/5
@@ -127,6 +158,22 @@ namespace LeagueOfInfo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "TeamID,LeagueName")] Team team)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    unitOfWork.TeamRepository.Update(team);
+                    unitOfWork.Save();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DataException /* dex */)
+            {
+                ModelState.AddModelError("", "Unable to save changes.  Try again, and if the problem persists, see your system administrator");
+            }
+            PopulateLeaguesDropDownList(team.LeagueID);
+            return View(team);
+            /*
             if (ModelState.IsValid)
             {
                 db.Entry(team).State = EntityState.Modified;
@@ -134,11 +181,21 @@ namespace LeagueOfInfo.Controllers
                 return RedirectToAction("Index");
             }
             return View(team);
+             */
+        }
+
+        private void PopulateLeaguesDropDownList(object selectedLeague = null)
+        {
+            var leaguesQuery = unitOfWork.LeagueRepository.Get(orderBy: q => q.OrderBy(d => d.LeagueName));
+            ViewBag.LeagueID = new SelectList(leaguesQuery, "LeagueID", "LeagueName", selectedLeague);
         }
 
         // GET: Team/Delete/5
         public ActionResult Delete(int id)
         {
+            Team team = unitOfWork.TeamRepository.GetByID(id);
+            return View(team);
+            /*
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -149,6 +206,7 @@ namespace LeagueOfInfo.Controllers
                 return HttpNotFound();
             }
             return View(team);
+             */
         }
 
         // POST: Team/Delete/5
@@ -156,19 +214,29 @@ namespace LeagueOfInfo.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            Team team = unitOfWork.TeamRepository.GetByID(id);
+            unitOfWork.TeamRepository.Delete(id);
+            unitOfWork.Save();
+            return RedirectToAction("Index");
+            /*
             Team team = db.Teams.Find(id);
             db.Teams.Remove(team);
             db.SaveChanges();
             return RedirectToAction("Index");
+             */
         }
 
         protected override void Dispose(bool disposing)
         {
+            unitOfWork.Dispose();
+            base.Dispose(disposing);
+            /*
             if (disposing)
             {
                 db.Dispose();
             }
             base.Dispose(disposing);
+             * */
         }
     }
 }

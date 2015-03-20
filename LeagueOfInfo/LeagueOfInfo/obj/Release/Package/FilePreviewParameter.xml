@@ -4,7 +4,7 @@
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Thomas\\Desktop\\CS\ 296\\Website\\LeagueOfInfo\\LeagueOfInfo\\obj\\Release\\Package\\PackageTmp$" />
     <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Thomas\\Desktop\\CS\ 296\\Website\\LeagueOfInfo\\LeagueOfInfo\\obj\\Release\\Package\\PackageTmp$" />
   </parameter>
-  <parameter name="DataModelContainer-Web.config Connection String" description="" value="metadata=res://*/Models.DataModel.csdl|res://*/Models.DataModel.ssdl|res://*/Models.DataModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=tcp:h0vrcbk0x8.database.windows.net,1433;Initial Catalog=LeagueOfInfoDB;User Id=LeagueOfInfoAdmin@h0vrcbk0x8;Password=League90&quot;" tags="">
+  <parameter name="DataModelContainer-Web.config Connection String" description="" value="metadata=res://*/Models.DataModel.csdl|res://*/Models.DataModel.ssdl|res://*/Models.DataModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=tcp:h0vrcbk0x8.database.windows.net,1433;initial catalog=LeagueOfInfoDB;user id=LeagueOfInfoAdmin@h0vrcbk0x8;password=League90;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="">
     <parameterEntry kind="XmlFile" scope="C:\\Users\\Thomas\\Desktop\\CS\ 296\\Website\\LeagueOfInfo\\LeagueOfInfo\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DataModelContainer']/@connectionString" />
   </parameter>
   <parameter name="LeagueOfInfoContext-Web.config Connection String" description="" value="Data Source=tcp:h0vrcbk0x8.database.windows.net,1433;Initial Catalog=LeagueOfInfoDB;User Id=LeagueOfInfoAdmin@h0vrcbk0x8;Password=League90" tags="">

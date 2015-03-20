@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Champion</h4>
+    <h4>Champions</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -34,9 +34,32 @@
             @Html.DisplayFor(model => model.PrimaryAttribute)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model => model.Comments)
+        </dt>
+
+        <dd>
+            <table class="comments table">
+                <tr>
+                    <th>User</th>
+                    <th>Comment</th>
+                </tr>
+                @foreach (var item in Model.Comments)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AuthorName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CommentBody)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ChampionID }) |
+    @Html.ActionLink("Add Comment", "../Comment/Create", new { id = Model.ChampionID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

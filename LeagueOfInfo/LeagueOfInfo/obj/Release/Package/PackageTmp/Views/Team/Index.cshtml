@@ -1,6 +1,6 @@
-﻿@model PagedList.IPagedList<LeagueOfInfo.Models.Team>
-@using PagedList.Mvc;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+﻿@model IEnumerable <LeagueOfInfo.Models.Team>
+
+<link href="~/Content/Site.css?Version1" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Teams";
@@ -40,9 +40,7 @@
             @Html.DisplayFor(modelItem => item.LeagueName)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.TeamID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.TeamID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.TeamID })
+            @Html.ActionLink("Details", "Details", new { id=item.TeamID })
         </td>
     </tr>
 }
@@ -50,7 +48,4 @@
 </table>
 
 <br />
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

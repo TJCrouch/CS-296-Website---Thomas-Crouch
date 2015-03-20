@@ -66,6 +66,17 @@ namespace LeagueOfInfo.DAL
             };
             champions.ForEach(s => context.Champions.Add(s));
             context.SaveChanges();
+
+            var comments = new List<Comment>
+            {
+                new Comment{CommentID=1, CommentBody="This champion is so op!", AuthorName="Newb", PostID=1, ChampionID=1 },
+                new Comment{CommentID=2, CommentBody="This champion is so op!", AuthorName="Newb", PostID=1, ChampionID=2 },
+                new Comment{CommentID=3, CommentBody="This champion is so op!", AuthorName="Newb", PostID=1, ChampionID=3 },
+                new Comment{CommentID=4, CommentBody="This champion is so op!", AuthorName="Newb", PostID=1, ChampionID=4 },
+                new Comment{CommentID=5, CommentBody="This champion is so op!", AuthorName="Newb", PostID=1, ChampionID=5 }
+            };
+            comments.ForEach(s => context.Comments.Add(s));
+            context.SaveChanges();
         }
     }
 }

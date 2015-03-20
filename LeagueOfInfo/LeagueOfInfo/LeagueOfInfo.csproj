@@ -128,47 +128,27 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ChampionController.cs" />
+    <Compile Include="Controllers\CommentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeagueController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\LeagueOfInfoContext.cs" />
     <Compile Include="DAL\LeagueOfInfoInitializer.cs" />
     <Compile Include="DAL\IPlayerRepository.cs" />
     <Compile Include="DAL\PlayerRepository.cs" />
+    <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Champion.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\DataModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\League.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Player.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Role.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Team.cs">
-      <DependentUpon>DataModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Champion.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\CommentViewModel.cs" />
+    <Compile Include="Models\League.cs" />
+    <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\Team.cs" />
     <Compile Include="Models\TeamViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -181,26 +161,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\DataModel.edmx.sql" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\DataModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DataModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\DataModel.edmx.diagram">
-      <DependentUpon>DataModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\DataModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DataModel.Context.cs</LastGenOutput>
-      <DependentUpon>DataModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\DataModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DataModel.cs</LastGenOutput>
-      <DependentUpon>DataModel.edmx</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\LeagueOfInfo.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -231,29 +193,21 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\League\Create.cshtml" />
-    <Content Include="Views\League\Delete.cshtml" />
     <Content Include="Views\League\Details.cshtml" />
-    <Content Include="Views\League\Edit.cshtml" />
     <Content Include="Views\League\Index.cshtml" />
-    <Content Include="Views\Team\Create.cshtml" />
-    <Content Include="Views\Team\Delete.cshtml" />
     <Content Include="Views\Team\Details.cshtml" />
-    <Content Include="Views\Team\Edit.cshtml" />
     <Content Include="Views\Team\Index.cshtml" />
-    <Content Include="Views\Player\Create.cshtml" />
-    <Content Include="Views\Player\Delete.cshtml" />
     <Content Include="Views\Player\Details.cshtml" />
-    <Content Include="Views\Player\Edit.cshtml" />
     <Content Include="Views\Player\Index.cshtml" />
-    <Content Include="Views\Champion\Create.cshtml" />
-    <Content Include="Views\Champion\Delete.cshtml" />
     <Content Include="Views\Champion\Details.cshtml" />
-    <Content Include="Views\Champion\Edit.cshtml" />
     <Content Include="Views\Champion\Index.cshtml" />
+    <Content Include="Views\Comment\Create.cshtml" />
+    <Content Include="Views\Comment\Index.cshtml" />
+    <Content Include="Views\Champion\Comments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
